@@ -1,7 +1,5 @@
 package org.example.gestionEmployes;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class GestionEmployes {
@@ -125,7 +123,7 @@ public class GestionEmployes {
         System.out.println("Enter the number: ");
         int choix;
 
-        // Declare variables outside the switch statement
+
         int id;
         String nom, poste;
         double salaire;
@@ -195,6 +193,6 @@ public class GestionEmployes {
             }
         } while (choix != 8);
 
-        sc.close(); // Close the scanner
+        sc.close();
     }
 }
