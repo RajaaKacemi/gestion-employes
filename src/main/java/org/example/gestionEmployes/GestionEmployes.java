@@ -66,14 +66,15 @@ public class GestionEmployes {
             }
         }
         if(!found){
-            System.out.println("Aucun employe.");
+            System.out.println("Aucun employe trouvé.");
         }
     }
 
     static void rechercherEmploye(String critere){
         boolean found = false;
         for(int i = 0; i < employes.length; i++){
-            if(employes[i].getNom().equals(critere) || employes[i].getPoste().equals(critere)){
+            if(employes[i] != null && (employes[i].getNom().equals(critere) || employes[i].getPoste().equals(critere))){
+                System.out.println();
                 System.out.println(employes[i].toString());
                 found = true;
             }
