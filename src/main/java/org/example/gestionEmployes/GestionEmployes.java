@@ -5,8 +5,9 @@ import java.util.Scanner;
 public class GestionEmployes {
     static int max_size = 50;
     static Employe[] employes = new Employe[max_size];
-    static int nombreEmployes = 0; // To keep track of the number of employees added
+    static int nombreEmployes = 0; // Pour suivre le nombre d’employés ajoutés
 
+    // function printMenu pour afficher pour l'utilisateur
     static void printMenu() {
         System.out.println("1. Ajouter un employe ");
         System.out.println("2. Modifier un employe ");
@@ -18,6 +19,7 @@ public class GestionEmployes {
         System.out.println("8. Quitter");
     }
 
+    // function pour ajouter un employe
     static void ajouterEmploye(Employe employe) {
         if (nombreEmployes >= max_size) {
             System.out.println("Erreur: Tableau plein.");
@@ -35,6 +37,7 @@ public class GestionEmployes {
         System.out.println("Employe ajouté avec succès.");
     }
 
+    //function pour modifier un employe d'après son ID
     static void modifierEmploye(int id, String nouveauNom, String nouveauPoste, double nouveauSalaire) {
         for (int i = 0; i < nombreEmployes; i++) {
             if (employes[i].getId() == id) {
@@ -48,21 +51,22 @@ public class GestionEmployes {
         System.out.println("Erreur: Employe n'existe pas.");
     }
 
+    //function pour supprimer un employe d'après son ID
     static void supprimerEmploye(int id) {
         for (int i = 0; i < nombreEmployes; i++) {
             if (employes[i].getId() == id) {
-                // Shift elements to the left to fill the gap
+                // Déplacer les éléments vers la gauche afin de réduire l'écart
                 for (int j = i; j < nombreEmployes - 1; j++) {
                     employes[j] = employes[j + 1];
                 }
-                employes[--nombreEmployes] = null; // Clear the last element
+                employes[--nombreEmployes] = null; // Pour vider la dernière case du tableau
                 System.out.println("Employe supprimé avec succès.");
                 return;
             }
         }
         System.out.println("Erreur: Employe n'existe pas.");
     }
-
+    // function pour afficher la liste des employes
     static void afficherEmployes() {
         if (nombreEmployes == 0) {
             System.out.println("Aucun employe trouvé.");
@@ -73,10 +77,11 @@ public class GestionEmployes {
             System.out.println(employes[i].toString());
         }
     }
-
+    // function pour rechercher un employe d'après sans post ou nom
     static void rechercherEmploye(String critere) {
         boolean found = false;
         for (int i = 0; i < nombreEmployes; i++) {
+            // en utilise equalsIgnoreCase pour comparer les string en ignorant les caractères majuscule et miniscule
             if (employes[i].getNom().equalsIgnoreCase(critere) || employes[i].getPoste().equalsIgnoreCase(critere)) {
                 System.out.println(employes[i].toString());
                 found = true;
@@ -86,7 +91,7 @@ public class GestionEmployes {
             System.out.println("Employe n'existe pas.");
         }
     }
-
+    // function pour Calculer la somme des salaires des employés présents dans le tableau
     static double calculerMasseSalariale() {
         double masse = 0;
         for (int i = 0; i < nombreEmployes; i++) {
@@ -94,17 +99,19 @@ public class GestionEmployes {
         }
         return masse;
     }
-
+    //Trier et afficher les employés par salaire dans l’ordre choisi (croissant ou décroissant).
     static void trierEmployesParSalaire(boolean ordreCroissant) {
+        //d'abord en check si le tableau est plein
         if (nombreEmployes == 0) {
             System.out.println("Aucun employe à trier.");
             return;
         }
 
-        // Bubble Sort implementation
+        // en utilise Bubble Sort algorithme
         for (int i = 0; i < nombreEmployes - 1; i++) {
             for (int j = 0; j < nombreEmployes - i - 1; j++) {
                 boolean condition;
+                //si ordreCroissant = true, donc choix = croissant, si non donc c'est décroissant
                 if (ordreCroissant) {
                     condition = employes[j].getSalaire() > employes[j + 1].getSalaire();
                 } else {
@@ -120,7 +127,7 @@ public class GestionEmployes {
             }
         }
 
-        // Display sorted employees
+        // Affichage des employes triées
         System.out.println("Employes triés par salaire (" + (ordreCroissant ? "croissant" : "décroissant") + ") :");
         afficherEmployes();
     }
