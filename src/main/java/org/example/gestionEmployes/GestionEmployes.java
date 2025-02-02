@@ -101,22 +101,16 @@ public class GestionEmployes {
     }
     //Trier et afficher les employés par salaire dans l’ordre choisi (croissant ou décroissant).
     static void trierEmployesParSalaire(boolean ordreCroissant) {
-        //d'abord en check si le tableau est plein
         if (nombreEmployes == 0) {
             System.out.println("Aucun employe à trier.");
             return;
         }
 
-        // en utilise Bubble Sort algorithme
+        // Utilisation du tri par bulles avec la méthode compareParSalaire
         for (int i = 0; i < nombreEmployes - 1; i++) {
             for (int j = 0; j < nombreEmployes - i - 1; j++) {
-                boolean condition;
-                //si ordreCroissant = true, donc choix = croissant, si non donc c'est décroissant
-                if (ordreCroissant) {
-                    condition = employes[j].getSalaire() > employes[j + 1].getSalaire();
-                } else {
-                    condition = employes[j].getSalaire() < employes[j + 1].getSalaire();
-                }
+                int comparison = Employe.compareParSalaire(employes[j], employes[j + 1]);
+                boolean condition = ordreCroissant ? comparison > 0 : comparison < 0;
 
                 if (condition) {
                     // Swap employes[j] and employes[j + 1]

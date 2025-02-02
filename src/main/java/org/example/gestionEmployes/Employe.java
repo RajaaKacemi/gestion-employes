@@ -53,4 +53,8 @@ public class Employe {
     public String toString() {
         return ("Employe " + id + " " + nom + " " + poste + " " + salaire);
     }
+
+    public static int compareParSalaire(Employe e1, Employe e2) {
+        return Double.compare(e1.getSalaire(), e2.getSalaire());
+    }
 }
